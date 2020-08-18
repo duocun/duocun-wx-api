@@ -1,0 +1,34 @@
+{
+  "name": "duocun-wx-api",
+  "version": "1.0.0",
+  "description": "log api server",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/duocun/duocun-wx-api.git"
+  },
+  "keywords": [
+    "duocun"
+  ],
+  "author": "zlkca",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/duocun/duocun-wx-api/issues"
+  },
+  "homepage": "https://github.com/duocun/duocun-wx-api#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "jest": "^26.4.0"
+  }
+}
