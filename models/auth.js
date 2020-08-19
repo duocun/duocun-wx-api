@@ -1,5 +1,7 @@
 
 import crypto from 'crypto';
+import https from 'https';
+
 import { cfg } from '../config.js';
 import { Log } from './log.js';
 
