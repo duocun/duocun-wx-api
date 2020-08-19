@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
 //     useUnifiedTopology: true
 // });
 
-app.use(SVC_PATH + "/auth", AuthRouter());
+app.use(SVC_PATH + "auth", AuthRouter());
 
 app.listen(cfg.SVC_PORT, () => {
     console.log(`svc path: ${SVC_PATH}`);
