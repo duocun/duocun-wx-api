@@ -14,7 +14,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false, limit: "1mb" }));
 app.use(bodyParser.json({ limit: "1mb" }));
 
-app.get("/wx", (req, res) => {
+app.get("/", (req, res) => {
     const auth = new AuthController();
     auth.genWechatToken(req, res);
 });

@@ -1,6 +1,7 @@
 
 import crypto from 'crypto';
 import { cfg } from '../config.js';
+import { Log } from './log.js';
 
 export class Auth {
     genWechatToken(token, timestamp, nonce, signature, echostr) {
@@ -9,6 +10,8 @@ export class Auth {
             const sha1 = crypto.createHash('sha1');
             const s = list.join('');
             const hash = sha1.update(s).digest('hex');
+            Log.save({msg: `genWechatToken hash: ${hash}`});
+            Log.save({msg: `genWechatToken signature: ${signature}`});
             if (hash === signature) {
                 return echostr;
             } else {
@@ -42,6 +45,7 @@ export class Auth {
 
                 res1.on('end', () => {
                     if (data) {
+                        Log.save({msg: `getWechatUserInfo data: ${data}`});
                         const s = JSON.parse(data);
                         if (s && s.openid) {
                             resolve(s);
@@ -69,7 +73,7 @@ export class Auth {
                 });
 
                 res.on('end', () => {
-                    // console.log('receiving done!');
+                    Log.save({msg: `getWechatAccessToken data: ${data}`});
                     if (data) {
                         const s = JSON.parse(data);
                         if (s && s.access_token) {
