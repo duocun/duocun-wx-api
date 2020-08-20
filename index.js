@@ -14,11 +14,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false, limit: "1mb" }));
 app.use(bodyParser.json({ limit: "1mb" }));
 
-app.get("/", (req, res) => {
-    const auth = new AuthController();
-    auth.genWechatToken(req, res);
-});
-
 // app.use(SVC_PATH + "/accounts", AccountRoute());
 // app.use(SVC_PATH + "/activities", ActivityRoute());
 
@@ -27,7 +22,7 @@ app.get("/", (req, res) => {
 //     useUnifiedTopology: true
 // });
 
-app.use(SVC_PATH + "auth", AuthRouter());
+app.use(SVC_PATH, AuthRouter());
 
 app.listen(cfg.SVC_PORT, () => {
     console.log(`svc path: ${SVC_PATH}`);
