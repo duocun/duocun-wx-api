@@ -25,7 +25,7 @@ app.get("/wx", (req, res) => {
     const controller = new AuthController();
     controller.genWechatToken(req, res);
 });
-app.use(SVC_PATH, AuthRouter());
+app.use('wxauth', AuthRouter());
 
 app.listen(cfg.SVC_PORT, () => {
     console.log(`svc path: ${SVC_PATH}`);
