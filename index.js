@@ -8,7 +8,7 @@ import {cfg} from './config.js';
 
 const app = express();
 
-const SVC_PATH = cfg.SVC_PATH;
+const SVC_PATH = process.env.ENV==='local' ? process.env.SVC_PATH : '';
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false, limit: "1mb" }));
