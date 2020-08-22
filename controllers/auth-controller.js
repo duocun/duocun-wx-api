@@ -28,6 +28,7 @@ export class AuthController {
   async getUserInfoByOpenId(req, res) {
     const openId = req.query.openId;
     const accessToken = req.query.accessToken;
+    // Log.save(req.query);
     const data = await this.model.getWechatUserInfo(accessToken, openId);
     res.send(data);
   }
@@ -35,6 +36,7 @@ export class AuthController {
 
   async getUserInfoByAuthCode(req, res) {
     const code = req.query.code;
+    // Log.save(req.query);
     const r = await this.model.getWechatAccessToken(code); // error code 40163
     if (r && r.access_token && r.openid) { // {code: 40029, msg:'invalid code rid ...'}
       // wechat token
@@ -48,7 +50,7 @@ export class AuthController {
       const data = await model.getWechatUserInfo(accessToken, openId);
       res.send(data);
     } else {
-      Log.save(r);
+      // Log.save(r);
       res.send();
     }
   }

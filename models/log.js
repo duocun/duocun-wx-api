@@ -3,13 +3,15 @@ import { cfg } from '../config.js';
 
 export class Log {
 
-    static save(data) {
+    save(data) {
             const options = {
-                hostname: cfg.LOG_SVC_HOST,
-                path: cfg.LOG_SVC_PATH,
+                host: 'api.duocun.ca', //cfg.LOG_SVC_HOST,
+                path: '/log', // cfg.LOG_SVC_PATH,
                 port: 443,
                 method: "POST",
+                rejectUnauthorized: false, 
                 headers: {
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
                     "Content-Type": "application/json", // 'Content-Length': Buffer.byteLength(data)
                 },
             };
@@ -21,6 +23,10 @@ export class Log {
                 });
 
                 res.on("end", r => {
+                    // if(s){
+                    //     const ret = JSON.parse(s);
+                    //     console.log(ret);
+                    // }
                     // if (s) {
                     //     const ret = JSON.parse(s);
                     //     resolve({status: 'success', data: ret, msg:''});
