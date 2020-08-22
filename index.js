@@ -2,7 +2,6 @@ import express from 'express';
 import cors from "cors";
 import bodyParser from "body-parser";
 // import mongoose from "mongoose";
-
 import {AuthRouter} from './routes/auth-route.js';
 import {cfg} from './config.js';
 
@@ -22,6 +21,10 @@ app.use(bodyParser.json({ limit: "1mb" }));
 //     useUnifiedTopology: true
 // });
 
+app.get("/wx", (req, res) => {
+    const controller = new AuthController();
+    controller.genWechatToken(req, res);
+});
 app.use(SVC_PATH, AuthRouter());
 
 app.listen(cfg.SVC_PORT, () => {
