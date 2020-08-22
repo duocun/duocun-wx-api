@@ -14,7 +14,7 @@ export class AuthController {
   }
 
   genWechatToken(req, res) {
-    const token = cfg.WECHAT.TOKEN;
+    const token = cfg.WECHAT_TOKEN;
     const timestamp = req.query.timestamp;
     const nonce = req.query.nonce;
     const signature = req.query.signature;
@@ -48,7 +48,7 @@ export class AuthController {
       const data = await model.getWechatUserInfo(accessToken, openId);
       res.send(data);
     } else {
-      Log.save(r).then(()=>{});;
+      Log.save(r);
       res.send();
     }
   }
