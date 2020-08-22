@@ -21,11 +21,11 @@ app.use(bodyParser.json({ limit: "1mb" }));
 //     useUnifiedTopology: true
 // });
 
-app.get("/wx", (req, res) => {
+app.get("/", (req, res) => {
     const controller = new AuthController();
     controller.genWechatToken(req, res);
 });
-app.use('wxauth', AuthRouter());
+app.use('/auth', AuthRouter());
 
 app.listen(cfg.SVC_PORT, () => {
     console.log(`svc path: ${SVC_PATH}`);
