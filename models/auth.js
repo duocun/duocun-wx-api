@@ -12,8 +12,7 @@ export class Auth {
             const sha1 = crypto.createHash('sha1');
             const s = list.join('');
             const hash = sha1.update(s).digest('hex');
-            Log.save({msg: `genWechatToken hash: ${hash}`});
-            Log.save({msg: `genWechatToken signature: ${signature}`});
+            Log.save({msg: `genWechatToken hash: ${hash}, signature: ${signature}`}).then(()=>{});
             if (hash === signature) {
                 return echostr;
             } else {
@@ -37,7 +36,7 @@ export class Auth {
     // }
     getWechatUserInfo(accessToken, openId) {
         let url = 'https://api.weixin.qq.com/sns/userinfo?access_token=' + accessToken + '&openid=' + openId + '&lang=zh_CN';
-
+        Log.save({msg: `send getWechatUserInfo`}).then(()=>{});
         return new Promise((resolve, reject) => {
             https.get(url, (res1) => {
                 let data = '';
@@ -47,7 +46,7 @@ export class Auth {
 
                 res1.on('end', () => {
                     if (data) {
-                        Log.save({msg: `getWechatUserInfo data: ${data}`});
+                        Log.save({msg: `received getWechatUserInfo data: ${data}`}).then(()=>{});
                         const s = JSON.parse(data);
                         if (s && s.openid) {
                             resolve(s);
@@ -66,7 +65,7 @@ export class Auth {
         const APP_ID = cfg.WECHAT_APP_ID;
         const SECRET = cfg.WECHAT_APP_SECRET;
         let url = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${APP_ID}&secret=${SECRET}&code=${authCode}'&grant_type=authorization_code`;
-
+        Log.save({msg: `send getWechatAccessToken`}).then(()=>{});
         return new Promise((resolve, reject) => {
             https.get(url, (res) => {
                 let data = '';
@@ -75,7 +74,7 @@ export class Auth {
                 });
 
                 res.on('end', () => {
-                    Log.save({msg: `getWechatAccessToken data: ${data}`});
+                    Log.save({msg: `received getWechatAccessToken data: ${data}`}).then(()=>{});
                     if (data) {
                         const s = JSON.parse(data);
                         if (s && s.access_token) {

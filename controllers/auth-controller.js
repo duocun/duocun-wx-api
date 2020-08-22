@@ -48,7 +48,7 @@ export class AuthController {
       const data = await model.getWechatUserInfo(accessToken, openId);
       res.send(data);
     } else {
-      Log.save(r);
+      Log.save(r).then(()=>{});;
       res.send();
     }
   }
