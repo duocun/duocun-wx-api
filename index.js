@@ -3,7 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 // import mongoose from "mongoose";
 
-import {AuthController} from './controllers/auth-controller';
+import {AuthController} from './controllers/auth-controller.js';
 import {AuthRouter} from './routes/auth-route.js';
 import {cfg} from './config.js';
 
